@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eduxis — Accompagnement Scolaire Personnalisé</title>
+  <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     LANDING
+══════════════════════════════════════════ -->
+<div id="landing" class="page">
+  <div class="noise-overlay"></div>
+  <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+
+  <nav class="land-nav">
+    <div class="logo">Edu<span>xis</span></div>
+    <div class="nav-actions">
+      <button class="btn btn-ghost" onclick="showPage('auth'); setAuthMode('login')">Connexion</button>
+      <button class="btn btn-primary" onclick="showPage('auth'); setAuthMode('register')">Commencer →</button>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-pill">✦ Plateforme scolaire personnalisée · Collège</div>
+    <h1>Révise mieux.<br><em>Progresse plus vite.</em></h1>
+    <p>Un parcours sur mesure, adapté à ton niveau — leçons claires, exercices progressifs, suivi en temps réel.</p>
+    <div class="hero-btns">
+      <button class="btn btn-primary btn-xl" onclick="showPage('auth'); setAuthMode('register')">Créer mon profil gratuit</button>
+      <button class="btn btn-outline btn-xl" onclick="showPage('auth'); setAuthMode('login')">J'ai déjà un compte</button>
+    </div>
+    <div class="hero-badges">
+      <div class="hbadge">📚 16 matières</div>
+      <div class="hbadge">🎯 Exercices progressifs</div>
+      <div class="hbadge">📊 Suivi personnalisé</div>
+      <div class="hbadge">100% gratuit</div>
+    </div>
+  </div>
+
+  <div class="land-preview">
+    <div class="preview-card">
+      <div class="pc-label">Progression</div>
+      <div class="pc-subject">📐 Géométrie</div>
+      <div class="pc-bar"><div class="pc-fill" style="width:80%"></div></div>
+      <div class="pc-pct">80%</div>
+    </div>
+    <div class="preview-card">
+      <div class="pc-label">Recommandation</div>
+      <div class="pc-rec">💡 Tu as du mal en <strong>Fractions</strong>, voici un exercice ciblé !</div>
+    </div>
+    <div class="preview-card">
+      <div class="pc-label">XP aujourd'hui</div>
+      <div class="pc-xp">+125 ⚡</div>
+      <div class="pc-lvl">Niveau 7 · Expert</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     AUTH
+══════════════════════════════════════════ -->
+<div id="auth" class="page auth-page">
+  <div class="noise-overlay"></div>
+  <div class="orb orb-1"></div>
+  <button class="auth-back" onclick="showPage('landing')">← Retour</button>
+
+  <div class="auth-box">
+    <div class="logo" style="font-size:1.4rem;margin-bottom:1.5rem">Edu<span>xis</span></div>
+    <div id="auth-alert" class="auth-alert" style="display:none"></div>
+
+    <div id="form-login">
+      <h2>Bon retour ! 👋</h2>
+      <p class="auth-sub">Continue ta progression là où tu t'étais arrêté.</p>
+      <div class="field"><label>Identifiant</label><input type="text" id="li-user" placeholder="ton_pseudo"></div>
+      <div class="field"><label>Mot de passe</label><input type="password" id="li-pass" placeholder="••••••••"></div>
+      <button class="btn btn-primary btn-full" onclick="doLogin()">Se connecter</button>
+      <div class="auth-switch">Pas encore de compte ? <a onclick="setAuthMode('register')">S'inscrire gratuitement</a></div>
+    </div>
+
+    <div id="form-register" style="display:none">
+      <h2>Crée ton profil 🚀</h2>
+      <p class="auth-sub">Quelques infos pour personnaliser ton expérience.</p>
+      <div class="field"><label>Pseudo</label><input type="text" id="re-user" placeholder="ton_pseudo"></div>
+      <div class="field"><label>Email</label><input type="email" id="re-email" placeholder="toi@exemple.fr"></div>
+      <div class="field"><label>Mot de passe</label><input type="password" id="re-pass" placeholder="••••••••"></div>
+      <button class="btn btn-primary btn-full" onclick="doRegister()">Créer mon compte →</button>
+      <div class="auth-switch">Déjà inscrit ? <a onclick="setAuthMode('login')">Se connecter</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     ONBOARDING
+══════════════════════════════════════════ -->
+<div id="onboarding" class="page">
+  <div class="noise-overlay"></div>
+  <div class="orb orb-2"></div>
+  <div class="ob-wrap">
+    <div class="ob-header">
+      <div class="logo" style="font-size:1.2rem">Edu<span>xis</span></div>
+      <div class="ob-stepper">
+        <div class="ob-step active" id="ostep-0">1</div>
+        <div class="ob-step-line"></div>
+        <div class="ob-step" id="ostep-1">2</div>
+        <div class="ob-step-line"></div>
+        <div class="ob-step" id="ostep-2">3</div>
+      </div>
+      <div class="ob-step-label" id="ob-step-label">Niveau scolaire</div>
+    </div>
+
+    <div class="ob-panel active" id="op-0">
+      <div class="ob-emoji">🎒</div>
+      <h2>Tu es en quelle classe ?</h2>
+      <p>On adapte le programme officiel à ton niveau.</p>
+      <div class="ob-choices">
+        <div class="ob-choice" data-val="6eme" onclick="selectObChoice(this,'level')"><span class="oc-num">6<sup>ème</sup></span><span class="oc-sub">Début de collège</span></div>
+        <div class="ob-choice" data-val="5eme" onclick="selectObChoice(this,'level')"><span class="oc-num">5<sup>ème</sup></span><span class="oc-sub">2e année</span></div>
+        <div class="ob-choice" data-val="4eme" onclick="selectObChoice(this,'level')"><span class="oc-num">4<sup>ème</sup></span><span class="oc-sub">3e année</span></div>
+        <div class="ob-choice" data-val="3eme" onclick="selectObChoice(this,'level')"><span class="oc-num">3<sup>ème</sup></span><span class="oc-sub">Brevet !</span></div>
+      </div>
+      <button class="btn btn-primary ob-next-btn" id="ob-btn-0" disabled onclick="goObStep(1)">Continuer →</button>
+    </div>
+
+    <div class="ob-panel" id="op-1">
+      <div class="ob-emoji">📊</div>
+      <h2>Comment tu te situes dans chaque pôle ?</h2>
+      <p>Sois honnête, c'est pour mieux t'accompagner !</p>
+      <div class="self-eval" id="self-eval"></div>
+      <button class="btn btn-primary ob-next-btn" onclick="goObStep(2)">Continuer →</button>
+    </div>
+
+    <div class="ob-panel" id="op-2">
+      <div class="ob-emoji">🎯</div>
+      <h2>Quelles matières veux-tu booster ?</h2>
+      <p>Sélectionne jusqu'à 3 priorités.</p>
+      <div class="ob-goals" id="ob-goals"></div>
+      <button class="btn btn-primary ob-next-btn" onclick="finishOnboarding()">Créer mon tableau de bord ✦</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     APP
+══════════════════════════════════════════ -->
+<div id="app" class="page app-layout">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <div class="logo sidebar-logo">Edu<span>xis</span></div>
+
+    <nav class="sidebar-nav">
+      <div class="snav-group">
+        <div class="snav-label">Principal</div>
+        <div class="snav-item active" onclick="switchPanel('dashboard',this)"><span>🏠</span>Tableau de bord</div>
+        <div class="snav-item" onclick="switchPanel('catalog',this)"><span>📚</span>Catalogue</div>
+        <div class="snav-item" onclick="switchPanel('leaderboard',this)"><span>🏆</span>Classement</div>
+      </div>
+      <div class="snav-group">
+        <div class="snav-label">Pôle Scientifique</div>
+        <div class="snav-item" onclick="openSubjectById('math',this)"><span>🔢</span>Maths</div>
+        <div class="snav-item" onclick="openSubjectById('pc',this)"><span>⚗️</span>Physique-Chimie</div>
+        <div class="snav-item" onclick="openSubjectById('svt',this)"><span>🌿</span>SVT</div>
+        <div class="snav-item" onclick="openSubjectById('tech',this)"><span>⚙️</span>Technologie</div>
+      </div>
+      <div class="snav-group">
+        <div class="snav-label">Pôle Littéraire</div>
+        <div class="snav-item" onclick="openSubjectById('fr',this)"><span>✍️</span>Français</div>
+        <div class="snav-item" onclick="openSubjectById('hist',this)"><span>🌍</span>Histoire-Géo</div>
+        <div class="snav-item" onclick="openSubjectById('emc',this)"><span>⚖️</span>EMC</div>
+      </div>
+      <div class="snav-group">
+        <div class="snav-label">Langues &amp; Arts</div>
+        <div class="snav-item" onclick="openSubjectById('en',this)"><span>🇬🇧</span>Anglais</div>
+        <div class="snav-item" onclick="openSubjectById('es',this)"><span>🇪🇸</span>Espagnol</div>
+        <div class="snav-item" onclick="openSubjectById('de',this)"><span>🇩🇪</span>Allemand</div>
+        <div class="snav-item" onclick="openSubjectById('it',this)"><span>🇮🇹</span>Italien</div>
+        <div class="snav-item" onclick="openSubjectById('zh',this)"><span>🇨🇳</span>Chinois</div>
+        <div class="snav-item" onclick="openSubjectById('arts',this)"><span>🎨</span>Arts Plastiques</div>
+      </div>
+    </nav>
+
+    <!-- ── PROFILE BUTTON ── -->
+    <div class="sidebar-profile">
+      <div class="profile-btn" id="profile-btn" onclick="toggleProfileMenu()">
+        <div class="profile-avatar" id="profile-avatar"></div>
+        <div class="profile-info">
+          <div class="profile-name" id="profile-name"></div>
+          <div class="profile-sub" id="profile-sub"></div>
+        </div>
+        <div class="profile-chevron" id="profile-chevron">›</div>
+      </div>
+
+      <!-- DROPDOWN MENU -->
+      <div class="profile-menu" id="profile-menu">
+        <div class="pm-header">
+          <div class="pm-avatar" id="pm-avatar"></div>
+          <div>
+            <div class="pm-name" id="pm-name"></div>
+            <div class="pm-email" id="pm-email"></div>
+          </div>
+        </div>
+        <div class="pm-divider"></div>
+
+        <!-- Theme toggle -->
+        <div class="pm-item" onclick="toggleTheme()">
+          <span class="pm-icon" id="theme-icon">☀️</span>
+          <span class="pm-label" id="theme-label">Mode clair</span>
+          <div class="pm-toggle" id="pm-toggle-theme">
+            <div class="toggle-thumb"></div>
+          </div>
+        </div>
+
+        <!-- Notifications -->
+        <div class="pm-item" onclick="toggleNotifs()">
+          <span class="pm-icon">🔔</span>
+          <span class="pm-label">Notifications</span>
+          <div class="pm-toggle active" id="pm-toggle-notif">
+            <div class="toggle-thumb"></div>
+          </div>
+        </div>
+
+        <div class="pm-divider"></div>
+
+        <!-- Stats -->
+        <div class="pm-section-title">Mon compte</div>
+        <div class="pm-item pm-stat-row">
+          <div class="pm-mini-stat"><span id="pm-xp">0</span><small>XP</small></div>
+          <div class="pm-mini-stat"><span id="pm-level">1</span><small>Niveau</small></div>
+          <div class="pm-mini-stat"><span id="pm-done">0</span><small>Exercices</small></div>
+        </div>
+
+        <div class="pm-divider"></div>
+
+        <!-- Settings -->
+        <div class="pm-item" onclick="openSettings()">
+          <span class="pm-icon">⚙️</span>
+          <span class="pm-label">Paramètres du profil</span>
+          <span class="pm-arrow">›</span>
+        </div>
+        <div class="pm-item" onclick="switchPanel('leaderboard'); closeProfileMenu()">
+          <span class="pm-icon">🏆</span>
+          <span class="pm-label">Voir le classement</span>
+          <span class="pm-arrow">›</span>
+        </div>
+
+        <div class="pm-divider"></div>
+
+        <div class="pm-item pm-danger" onclick="doLogout()">
+          <span class="pm-icon">↩</span>
+          <span class="pm-label">Déconnexion</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── SETTINGS MODAL ── -->
+  <div class="modal-overlay" id="settings-modal" onclick="closeSettings()">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title">⚙️ Paramètres du profil</div>
+        <button class="modal-close" onclick="closeSettings()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="settings-section">
+          <div class="settings-label">Pseudo</div>
+          <input class="settings-input" id="set-pseudo" type="text" placeholder="Nouveau pseudo">
+        </div>
+        <div class="settings-section">
+          <div class="settings-label">Email</div>
+          <input class="settings-input" id="set-email" type="email" placeholder="Nouvel email">
+        </div>
+        <div class="settings-section">
+          <div class="settings-label">Classe</div>
+          <select class="settings-input" id="set-class">
+            <option value="6eme">6ème</option>
+            <option value="5eme">5ème</option>
+            <option value="4eme">4ème</option>
+            <option value="3eme">3ème</option>
+          </select>
+        </div>
+        <div class="settings-section">
+          <div class="settings-label">Thème</div>
+          <div class="theme-options">
+            <div class="theme-opt dark-opt selected" id="theme-opt-dark" onclick="setTheme('dark')">
+              <span>🌙</span> Sombre
+            </div>
+            <div class="theme-opt light-opt" id="theme-opt-light" onclick="setTheme('light')">
+              <span>☀️</span> Clair
+            </div>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn btn-ghost" onclick="closeSettings()">Annuler</button>
+          <button class="btn btn-primary" onclick="saveSettings()">Enregistrer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MAIN ── -->
+  <main class="app-main">
+    <div class="app-topbar">
+      <div>
+        <h1 class="app-title" id="app-title">Tableau de bord</h1>
+        <div class="app-crumb" id="app-crumb"></div>
+      </div>
+      <div class="topbar-chips">
+        <div class="chip chip-xp">⚡ <span id="top-xp">0</span> XP</div>
+        <div class="chip chip-lvl">Niv. <span id="top-level">1</span></div>
+        <div class="chip chip-class" id="top-class"></div>
+      </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="panel active" id="p-dashboard">
+      <div class="dash-stats-grid" id="dash-stats"></div>
+      <div class="dash-mid">
+        <div class="card"><div class="card-title">🕸️ Zones de force</div><canvas id="spider-chart" width="300" height="260"></canvas></div>
+        <div class="card"><div class="card-title">💡 Recommandations personnalisées</div><div id="recommendations"></div></div>
+      </div>
+      <div class="card"><div class="card-title">📊 Progression par matière</div><div class="subj-prog-grid" id="subj-prog-grid"></div></div>
+    </div>
+
+    <!-- CATALOG -->
+    <div class="panel" id="p-catalog">
+      <div class="pole-block"><div class="pole-heading sci">🔬 Pôle Scientifique</div><div class="catalog-grid" id="cg-sci"></div></div>
+      <div class="pole-block"><div class="pole-heading lit">📖 Pôle Littéraire</div><div class="catalog-grid" id="cg-lit"></div></div>
+      <div class="pole-block"><div class="pole-heading lang">🌐 Langues &amp; Arts</div><div class="catalog-grid" id="cg-lang"></div></div>
+    </div>
+
+    <!-- SUBJECT -->
+    <div class="panel" id="p-subject">
+      <div class="subject-hero" id="subject-hero"></div>
+      <div class="chapter-cards" id="chapter-cards"></div>
+    </div>
+
+    <!-- LESSON -->
+    <div class="panel" id="p-lesson">
+      <button class="back-pill" onclick="backToSubject()">← Retour aux chapitres</button>
+      <div class="lesson-layout" id="lesson-layout"></div>
+    </div>
+
+    <!-- EXERCISE -->
+    <div class="panel" id="p-exercise">
+      <button class="back-pill" onclick="backToLesson()">← Retour à la leçon</button>
+      <div class="ex-track" id="ex-track"></div>
+      <div class="ex-box" id="ex-box"></div>
+    </div>
+
+    <!-- LEADERBOARD -->
+    <div class="panel" id="p-leaderboard">
+      <div class="card">
+        <div class="card-title">🏆 Top 10 — Classement général</div>
+        <p style="font-size:.8rem;color:var(--muted);margin-bottom:1.5rem">Classé par XP total · Toutes matières</p>
+        <div id="lb-list"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- XP Pop -->
+<div id="xp-pop" class="xp-pop" style="display:none"></div>
+
+<!-- Click outside to close profile menu -->
+<script>
+  document.addEventListener('click', function(e) {
+    const menu = document.getElementById('profile-menu');
+    const btn  = document.getElementById('profile-btn');
+    if (menu && !menu.contains(e.target) && btn && !btn.contains(e.target)) {
+      closeProfileMenu();
+    }
+  });
+</script>
+
+<script src="app.js"></script>
+</body>
+</html>
